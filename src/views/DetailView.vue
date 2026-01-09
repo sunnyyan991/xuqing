@@ -69,7 +69,18 @@ const nextWork = computed(() => {
       <section v-if="currentWork.cover" class="pb-8 md:pb-12">
         <div class="content-container">
           <div class="w-full overflow-hidden bg-neutral-100">
+            <!-- SVG 使用 iframe 標籤以保留內部鏈接交互 -->
+            <iframe
+                v-if="currentWork.coverIsSvg"
+                :src="currentWork.cover"
+                :title="`${currentWork.name} Cover`"
+                class="w-full border-0"
+                style="aspect-ratio: 4/3; min-height: 400px;"
+                scrolling="no"
+            />
+            <!-- 其他圖片格式使用 img 標籤 -->
             <img
+                v-else
                 :src="currentWork.cover"
                 :alt="`${currentWork.name} Cover`"
                 class="w-full h-auto"
@@ -87,7 +98,18 @@ const nextWork = computed(() => {
                 :key="image.name"
                 class="w-full overflow-hidden bg-neutral-100"
             >
+              <!-- SVG 使用 iframe 標籤以保留內部鏈接交互 -->
+              <iframe
+                  v-if="image.isSvg"
+                  :src="image.url"
+                  :title="`${currentWork.name} - Image ${index + 1}`"
+                  class="w-full border-0"
+                  style="aspect-ratio: 4/3; min-height: 400px;"
+                  scrolling="no"
+              />
+              <!-- 其他圖片格式使用 img 標籤 -->
               <img
+                  v-else
                   :src="image.url"
                   :alt="`${currentWork.name} - Image ${index + 1}`"
                   class="w-full h-auto"

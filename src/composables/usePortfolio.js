@@ -40,6 +40,7 @@ export function usePortfolio() {
             // 名稱：取下劃線後的部分，下劃線轉空格
             name: nameParts.join(' ').replace(/_/g, ' ') || folderName,
             cover: null,
+            coverIsSvg: false,
             images: [],
             allImages: [] // 保存所有圖片用於後備封面
           }
@@ -47,20 +48,24 @@ export function usePortfolio() {
 
         const imageUrl = workImages[path]
         const lowerFileName = fileName.toLowerCase()
+        const isSvg = lowerFileName.endsWith('.svg')
 
-        // 保存所有圖片
+        // 保存所有圖片（包含是否為 SVG 的標記）
         works[folderName].allImages.push({
           name: fileName,
-          url: imageUrl
+          url: imageUrl,
+          isSvg: isSvg
         })
 
         // Check if this is a cover image
         if (lowerFileName.startsWith('cover')) {
           works[folderName].cover = imageUrl
+          works[folderName].coverIsSvg = isSvg
         } else {
           works[folderName].images.push({
             name: fileName,
-            url: imageUrl
+            url: imageUrl,
+            isSvg: isSvg
           })
         }
       }
@@ -76,6 +81,7 @@ export function usePortfolio() {
       // 如果沒有指定 cover，使用第一張圖片
       if (!work.cover && work.allImages.length > 0) {
         work.cover = work.allImages[0].url
+        work.coverIsSvg = work.allImages[0].isSvg
         // 從 images 中移除被用作 cover 的圖片
         work.images = work.images.filter(img => img.url !== work.cover)
       }
