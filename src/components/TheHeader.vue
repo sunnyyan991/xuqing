@@ -40,7 +40,7 @@ onUnmounted(() => {
     ]"
   >
     <nav class="content-container flex items-center justify-between">
-      <!-- Logo / Home (Blue area in wireframe) -->
+      <!-- Logo / Home -->
       <RouterLink
           to="/"
           class="text-sm tracking-[0.15em] uppercase font-medium hover:opacity-60 transition-opacity duration-300"
@@ -49,7 +49,7 @@ onUnmounted(() => {
         Xuqing
       </RouterLink>
 
-      <!-- Desktop Navigation (Home, 01, 02, 03 - Blue areas) -->
+      <!-- Desktop Navigation - 顯示名稱而不是數字 -->
       <div class="hidden md:flex items-center gap-10">
         <RouterLink
             to="/"
@@ -66,7 +66,7 @@ onUnmounted(() => {
             class="nav-link"
             :class="{ 'active': route.params.slug === item.slug }"
         >
-          {{ item.order }}
+          {{ item.name }}
         </RouterLink>
       </div>
 
@@ -126,7 +126,7 @@ onUnmounted(() => {
               class="text-sm tracking-widest uppercase text-secondary hover:text-primary transition-colors duration-300"
               @click="closeMobileMenu"
           >
-            {{ item.order }} — {{ item.name }}
+            {{ item.name }}
           </RouterLink>
         </div>
       </div>

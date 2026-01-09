@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Xuqing Portfolio</title>
+    <script>
+        // GitHub Pages 不支持 SPA 路由，需要用這個 hack
+        // 當用戶刷新頁面或直接訪問子路由時，會先到 404.html
+        // 然後重定向到首頁，並帶上原始路徑信息
+        const path = window.location.pathname;
+        const search = window.location.search;
+        const hash = window.location.hash;
+
+        // 獲取 base path
+        const basePath = '/xuqing';
+
+        // 重定向到首頁，並將路徑信息保存到 sessionStorage
+        if (path !== basePath && path !== basePath + '/') {
+            sessionStorage.setItem('redirect', path + search + hash);
+            window.location.replace(basePath + '/');
+        }
+    </script>
+</head>
+<body>
+<p>Redirecting...</p>
+</body>
+</html>
