@@ -22,21 +22,21 @@ const scrollToWorks = () => {
 <template>
   <main>
     <!-- Hero Section (Yellow area in wireframe) -->
-    <section class="relative h-screen flex items-center justify-center">
-      <div class="w-full h-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 py-20 md:py-24">
-        <div class="relative w-full h-full overflow-hidden bg-neutral-100">
-          <!-- Hero Image -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 md:pt-24 pb-8">
+      <div class="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
+        <div class="relative w-full bg-neutral-100 flex items-center justify-center">
+          <!-- Hero Image - 完整顯示整張圖片 -->
           <img
               :src="heroImage"
               alt="Portfolio Hero"
-              class="w-full h-full object-cover"
+              class="w-full h-auto max-h-[calc(100vh-8rem)] object-contain"
           />
 
           <!-- View Portfolio Button (Blue area - bottom right corner) -->
           <button
               @click="scrollToWorks"
-              class="absolute bottom-8 right-8 md:bottom-12 md:right-12
-                   px-8 py-4 text-sm tracking-widest uppercase
+              class="absolute bottom-4 right-4 md:bottom-8 md:right-8
+                   px-6 py-3 md:px-8 md:py-4 text-sm tracking-widest uppercase
                    bg-black text-white border border-black
                    hover:bg-white hover:text-black
                    transition-all duration-300 ease-out"
