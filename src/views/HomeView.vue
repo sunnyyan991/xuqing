@@ -3,7 +3,7 @@ import {RouterLink} from 'vue-router'
 import {usePortfolio} from '@/composables/usePortfolio'
 
 // Import hero image statically (you can change this path)
-import heroImage from '@/assets/hero.svg'
+import heroImage from '@/assets/hero.png'
 
 const {worksWithCovers, getOtherWorks} = usePortfolio()
 
