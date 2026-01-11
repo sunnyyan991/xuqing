@@ -68,22 +68,29 @@ const nextWork = computed(() => {
       <!-- Cover Image -->
       <section v-if="currentWork.cover" class="pb-8 md:pb-12">
         <div class="content-container">
-          <div class="w-full overflow-hidden bg-neutral-100">
-            <!-- SVG 使用 iframe 標籤以保留內部鏈接交互 -->
+          
+          <div class="w-full bg-neutral-100 relative">
+            
+            <img 
+                v-if="currentWork.coverBg && currentWork.coverIsSvg"
+                :src="currentWork.coverBg"
+                class="w-full h-auto block z-0"
+                alt="cover background"
+            />
+
             <iframe
                 v-if="currentWork.coverIsSvg"
                 :src="currentWork.cover"
                 :title="`${currentWork.name} Cover`"
-                class="w-full border-0"
-                style="aspect-ratio: 4/3; min-height: 400px;"
+                class="absolute inset-0 w-full h-full border-0 z-10"
                 scrolling="no"
             />
-            <!-- 其他圖片格式使用 img 標籤 -->
+            
             <img
                 v-else
                 :src="currentWork.cover"
                 :alt="`${currentWork.name} Cover`"
-                class="w-full h-auto"
+                class="w-full h-auto block relative z-20"
             />
           </div>
         </div>

@@ -1,13 +1,5 @@
-<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"
->
+<svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
     <a href="https://gameshowcase.ucsc.edu/project/comet/" target="_blank" style="cursor: pointer;">
-
-        <image
-                href="/images/comet.png"
-                x="0" y="0"
-                width="100%" height="100%"
-                preserveAspectRatio="xMidYMid meet"
-        />
-
+        <rect width="100%" height="100%" fill="transparent" />
     </a>
 </svg>

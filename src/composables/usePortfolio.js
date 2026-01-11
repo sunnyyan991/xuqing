@@ -85,7 +85,28 @@ export function usePortfolio() {
         // 從 images 中移除被用作 cover 的圖片
         work.images = work.images.filter(img => img.url !== work.cover)
       }
-
+      // ✨✨✨ 新增逻辑：同名背景图自动匹配 ✨✨✨
+      // 如果封面是 SVG，去 allImages 里找一个名字一样、但格式是图片的文件
+      if (work.coverIsSvg) {
+        // 1. 找到当前封面的文件名对象
+        const coverEntry = work.allImages.find(img => img.url === work.cover)
+        
+        if (coverEntry) {
+          // 2. 获取名字主体 (例如 "video.svg" -> "video")
+          const baseName = coverEntry.name.substring(0, coverEntry.name.lastIndexOf('.'))
+          
+          // 3. 寻找双胞胎 (名字主体一样，但不是 SVG 的)
+          const twinBg = work.allImages.find(img => 
+            !img.isSvg && img.name.startsWith(baseName + '.')
+          )
+          
+          // 4. 找到了就设为背景
+          if (twinBg) {
+            work.coverBg = twinBg.url
+          }
+        }
+      }
+      // ✨✨✨ 新增结束 ✨✨✨
       // 清理臨時數據
       delete work.allImages
     })
