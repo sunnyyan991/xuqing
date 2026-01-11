@@ -65,7 +65,17 @@ const scrollToWorks = () => {
           >
             <!-- Cover Image Container -->
             <div class="relative aspect-[4/3] bg-neutral-100 overflow-hidden mb-5">
+              
+              <iframe
+                  v-if="work.coverIsSvg"
+                  :src="work.cover"
+                  :title="work.name"
+                  class="w-full h-full border-0 pointer-events-none" 
+                  scrolling="no"
+              ></iframe>
+
               <img
+                  v-else
                   :src="work.cover"
                   :alt="work.name"
                   class="w-full h-full object-cover transition-all duration-700 ease-out
