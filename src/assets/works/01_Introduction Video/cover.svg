@@ -3,7 +3,7 @@
     <a href="https://www.youtube.com/watch?v=IVrzz-OoTv8" target="_blank" style="cursor: pointer;">
 
         <image
-                href="../../images/video.png"
+                href="/images/video.png"
                 x="0" y="0"
                 width="100%" height="100%"
                 preserveAspectRatio="xMidYMid meet"
