@@ -1,6 +1,6 @@
 <script setup>
 const currentYear = new Date().getFullYear()
-const email = 'hello@xuqingyan.com'
+const email = 'yanxuqing341@gmail.com'
 </script>
 
 <template>
