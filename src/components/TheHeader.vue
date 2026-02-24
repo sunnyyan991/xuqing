@@ -155,6 +155,18 @@ watch(
                 <span class="w-8 text-[11px] text-neutral-400 shrink-0">{{ item.order }}</span>
                 <span>{{ item.name }}</span>
               </RouterLink>
+
+              <div class="h-px bg-neutral-200 my-2" />
+
+              <a
+                  href="https://gu0za.itch.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center w-full px-4 py-3 text-sm tracking-wide border border-[#FA5C5C] text-[#FA5C5C] hover:bg-[#FA5C5C] hover:text-white transition-all duration-300"
+                  @click="closeDrawer"
+              >
+                View My Projects on itch.io!
+              </a>
             </div>
           </div>
         </div>
