@@ -105,16 +105,33 @@ const nextWork = computed(() => {
                 :key="image.name"
                 class="w-full overflow-hidden bg-neutral-100"
             >
-              <!-- SVG 使用 iframe 標籤以保留內部鏈接交互 -->
+              <!-- 同名 svg + png: png 作底圖，svg 疊加保留可點擊區域 -->
+              <div v-if="image.kind === 'interactive'" class="relative">
+                <img
+                    :src="image.bgUrl"
+                    :alt="`${currentWork.name} - Image ${index + 1}`"
+                    class="w-full h-auto block"
+                    loading="lazy"
+                />
+                <iframe
+                    :src="image.url"
+                    :title="`${currentWork.name} - Interactive Image ${index + 1}`"
+                    class="absolute inset-0 w-full h-full border-0 z-10"
+                    scrolling="no"
+                />
+              </div>
+
+              <!-- 單獨 SVG -->
               <iframe
-                  v-if="image.isSvg"
+                  v-else-if="image.isSvg"
                   :src="image.url"
                   :title="`${currentWork.name} - Image ${index + 1}`"
                   class="w-full border-0"
                   style="aspect-ratio: 4/3; min-height: 400px;"
                   scrolling="no"
               />
-              <!-- 其他圖片格式使用 img 標籤 -->
+
+              <!-- 普通圖片 -->
               <img
                   v-else
                   :src="image.url"
@@ -194,7 +211,7 @@ const nextWork = computed(() => {
             >
               <div class="relative aspect-[4/3] bg-neutral-100 overflow-hidden mb-5">
                 <img
-                    :src="work.cover"
+                    :src="work.coverBg ? work.coverBg : work.cover"
                     :alt="work.name"
                     class="w-full h-full object-cover transition-all duration-700 ease-out
                          group-hover:scale-[1.03] group-hover:opacity-90"

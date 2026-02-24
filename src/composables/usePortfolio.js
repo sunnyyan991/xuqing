@@ -17,6 +17,10 @@ const workImages = import.meta.glob('@/assets/works/**/*.{png,jpg,jpeg,webp,gif,
 })
 
 export function usePortfolio() {
+  const getBaseName = (fileName) => {
+    return fileName.replace(/\.[^.]+$/, '').toLowerCase()
+  }
+
   /**
    * Parse the works folder structure and return organized data
    */
@@ -151,10 +155,60 @@ export function usePortfolio() {
     const work = getWorkBySlug(slug)
     if (!work) return []
 
-    // Sort images by name for consistent ordering
-    return [...work.images].sort((a, b) =>
-        a.name.localeCompare(b.name, undefined, {numeric: true})
+    // 1) Sort by file name for stable display order
+    const sortedImages = [...work.images].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, {numeric: true})
     )
+
+    // 2) Build same-name pairs: foo.svg + foo.png/jpg/webp...
+    const pairMap = new Map()
+    sortedImages.forEach(image => {
+      const baseName = getBaseName(image.name)
+      const current = pairMap.get(baseName) || {svg: null, raster: null}
+
+      if (image.isSvg && !current.svg) {
+        current.svg = image
+      } else if (!image.isSvg && !current.raster) {
+        current.raster = image
+      }
+
+      pairMap.set(baseName, current)
+    })
+
+    // 3) Render each pair only once.
+    //    - If a pair exists, return one interactive item (SVG overlay + image background)
+    //    - Otherwise return the original single image item
+    const consumedUrls = new Set()
+    const displayImages = []
+
+    sortedImages.forEach(image => {
+      if (consumedUrls.has(image.url)) {
+        return
+      }
+
+      const baseName = getBaseName(image.name)
+      const pair = pairMap.get(baseName)
+
+      if (pair?.svg && pair?.raster) {
+        displayImages.push({
+          ...pair.svg,
+          kind: 'interactive',
+          bgUrl: pair.raster.url,
+          bgName: pair.raster.name
+        })
+        consumedUrls.add(pair.svg.url)
+        consumedUrls.add(pair.raster.url)
+        return
+      }
+
+      displayImages.push({
+        ...image,
+        kind: image.isSvg ? 'svg' : 'image'
+      })
+      consumedUrls.add(image.url)
+    })
+
+    return displayImages
   }
 
   /**

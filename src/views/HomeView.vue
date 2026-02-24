@@ -106,7 +106,7 @@ const scrollToWorks = () => {
           >
             <div class="relative aspect-[16/9] bg-neutral-100 overflow-hidden mb-5">
               <img
-                  :src="work.cover"
+                  :src="work.coverBg ? work.coverBg : work.cover"
                   :alt="work.name"
                   class="w-full h-full object-cover transition-all duration-700 ease-out
                        group-hover:scale-[1.03] group-hover:opacity-90"
