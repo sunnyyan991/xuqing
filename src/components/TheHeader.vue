@@ -2,9 +2,11 @@
 import {onMounted, onUnmounted, ref, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 import {usePortfolio} from '@/composables/usePortfolio'
+import {useTheme} from '@/composables/useTheme'
 
 const route = useRoute()
 const {navItems} = usePortfolio()
+const {isDark, toggleTheme} = useTheme()
 
 const isScrolled = ref(false)
 const isDrawerOpen = ref(false)
@@ -54,7 +56,7 @@ watch(
       class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       :class="[
       isScrolled
-        ? 'bg-white/90 backdrop-blur-md py-5'
+        ? 'bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md py-5'
         : 'bg-transparent py-8'
     ]"
   >
@@ -93,7 +95,24 @@ watch(
         </RouterLink>
 
         <button
-            class="inline-flex items-center gap-2 px-3 py-2 text-xs tracking-[0.15em] uppercase border border-neutral-300 hover:border-neutral-500 hover:bg-white/70 transition-all duration-300"
+            type="button"
+            @click="toggleTheme"
+            :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            :aria-pressed="isDark"
+            class="inline-flex items-center justify-center w-9 h-9 shrink-0 border border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current transition-colors duration-300"
+        >
+          <svg v-if="isDark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+            <path stroke-linecap="round" stroke-width="1.5" d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z"/>
+          </svg>
+        </button>
+
+        <button
+            class="inline-flex items-center gap-2 px-3 py-2 text-xs tracking-[0.15em] uppercase border border-neutral-300 hover:border-neutral-500 hover:bg-white/70 dark:border-neutral-700 dark:hover:border-neutral-500 dark:hover:bg-neutral-800/70 transition-all duration-300"
             @click="openDrawer"
             aria-label="Open projects list"
         >
@@ -115,7 +134,7 @@ watch(
     >
       <div
           v-if="isDrawerOpen"
-          class="fixed inset-0 z-40 bg-black/30"
+          class="fixed inset-0 z-40 bg-black/30 dark:bg-black/60"
           @click="closeDrawer"
       />
     </Transition>
@@ -130,12 +149,12 @@ watch(
     >
       <aside
           v-if="isDrawerOpen"
-          class="fixed top-0 right-0 z-50 h-screen w-[86vw] max-w-[420px] bg-white border-l border-neutral-200 shadow-xl"
+          class="fixed top-0 right-0 z-50 h-screen w-[86vw] max-w-[420px] bg-white dark:bg-neutral-900 border-l border-neutral-200 dark:border-neutral-800 shadow-xl"
           role="dialog"
           aria-label="Project list"
       >
         <div class="h-full flex flex-col">
-          <div class="flex items-center justify-between px-6 md:px-8 py-6 border-b border-neutral-200">
+          <div class="flex items-center justify-between px-6 md:px-8 py-6 border-b border-neutral-200 dark:border-neutral-800">
             <p class="text-xs tracking-[0.2em] uppercase text-secondary">Projects</p>
             <button
                 class="p-2 -mr-2 hover:opacity-60 transition-opacity duration-300"
@@ -171,7 +190,7 @@ watch(
                 <span>{{ item.name }}</span>
               </RouterLink>
 
-              <div class="h-px bg-neutral-200 my-2" />
+              <div class="h-px bg-neutral-200 dark:bg-neutral-800 my-2" />
 
               <a
                   href="https://gu0za.itch.io/"

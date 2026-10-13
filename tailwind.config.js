@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         "./index.html",
         "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -10,8 +11,8 @@ export default {
                 sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
             },
             colors: {
-                primary: '#000000',
-                secondary: '#888888',
+                primary: 'rgb(var(--color-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
                 accent: '#333333',
                 neutral: {
                     50: '#fafafa',

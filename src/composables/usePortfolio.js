@@ -115,10 +115,13 @@ export function usePortfolio() {
       delete work.allImages
     })
 
-    // Convert to array and sort by order
+    // Keep folder names as stable URLs; generate continuous display numbers after sorting.
     return Object.values(works).sort((a, b) => {
       return a.order.localeCompare(b.order, undefined, {numeric: true})
-    })
+    }).map((work, index) => ({
+      ...work,
+      order: String(index + 1).padStart(2, '0')
+    }))
   }
 
   const allWorks = ref(parseWorks())

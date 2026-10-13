@@ -2,18 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
-
 /* Base styles */
 @layer base {
+    :root {
+        --color-primary: 0 0 0;
+        --color-secondary: 136 136 136;
+        color-scheme: light;
+    }
+
+    :root.dark {
+        --color-primary: 245 245 245;
+        --color-secondary: 163 163 163;
+        color-scheme: dark;
+    }
+
     html {
         @apply scroll-smooth;
         font-size: 16px;
     }
 
     body {
-        @apply font-sans text-primary bg-white antialiased;
+        @apply font-sans text-primary bg-white dark:bg-neutral-900 antialiased transition-colors duration-300;
         letter-spacing: 0.01em;
     }
 
@@ -23,7 +32,7 @@
 
     /* Selection color */
     ::selection {
-        @apply bg-black text-white;
+        @apply bg-black text-white dark:bg-white dark:text-black;
     }
 }
 
@@ -55,6 +64,8 @@
         @apply inline-block px-8 py-4 text-xs tracking-[0.2em] uppercase
         text-white bg-black border border-black
         hover:bg-white hover:text-black
+        dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100
+        dark:hover:bg-neutral-800 dark:hover:text-white
         transition-all duration-300 ease-out;
     }
 

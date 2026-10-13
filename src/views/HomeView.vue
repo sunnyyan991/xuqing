@@ -24,7 +24,7 @@ const scrollToWorks = () => {
     <!-- Hero Section (Yellow area in wireframe) -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 md:pt-24 pb-8">
       <div class="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
-        <div class="relative w-full bg-neutral-100 flex items-center justify-center">
+        <div class="relative w-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
           <!-- Hero Image - 完整顯示整張圖片 -->
           <img
               :src="heroImage"
@@ -39,6 +39,8 @@ const scrollToWorks = () => {
                    px-6 py-3 md:px-8 md:py-4 text-sm tracking-widest uppercase
                    bg-black text-white border border-black
                    hover:bg-white hover:text-black
+                   dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100
+                   dark:hover:bg-neutral-800 dark:hover:text-white
                    transition-all duration-300 ease-out"
           >
             View Portfolio
@@ -64,7 +66,7 @@ const scrollToWorks = () => {
               class="work-card group block"
           >
             <!-- Cover Image Container -->
-            <div class="relative aspect-[4/3] bg-neutral-100 overflow-hidden mb-5">
+            <div class="relative aspect-[4/3] bg-neutral-100 dark:bg-neutral-800 overflow-hidden mb-5">
               
               <img
                   :src="work.coverBg ? work.coverBg : work.cover"
@@ -91,7 +93,7 @@ const scrollToWorks = () => {
     </section>
 
     <!-- Other Works Section -->
-    <section v-if="otherWorks.length > 0" class="py-24 md:py-32 bg-neutral-50">
+    <section v-if="otherWorks.length > 0" class="py-24 md:py-32 bg-neutral-50 dark:bg-neutral-950">
       <div class="content-container">
         <h2 class="text-xs tracking-[0.3em] uppercase text-secondary mb-16 md:mb-20">
           Other Works
@@ -104,7 +106,7 @@ const scrollToWorks = () => {
               :to="`/work/${work.slug}`"
               class="work-card group block"
           >
-            <div class="relative aspect-[16/9] bg-neutral-100 overflow-hidden mb-5">
+            <div class="relative aspect-[16/9] bg-neutral-100 dark:bg-neutral-800 overflow-hidden mb-5">
               <img
                   :src="work.coverBg ? work.coverBg : work.cover"
                   :alt="work.name"

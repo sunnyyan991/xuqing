@@ -42,7 +42,9 @@ const nextWork = computed(() => {
             to="/"
             class="inline-block px-6 py-3 text-sm tracking-widest uppercase
                  bg-black text-white border border-black
-                 hover:bg-white hover:text-black transition-all duration-300"
+                 hover:bg-white hover:text-black
+                 dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100
+                 dark:hover:bg-neutral-800 dark:hover:text-white transition-all duration-300"
         >
           Back to Home
         </RouterLink>
@@ -69,7 +71,7 @@ const nextWork = computed(() => {
       <section v-if="currentWork.cover" class="pb-8 md:pb-12">
         <div class="content-container">
           
-          <div class="w-full bg-neutral-100 relative">
+          <div class="w-full bg-neutral-100 dark:bg-neutral-800 relative">
             
             <img 
                 v-if="currentWork.coverBg && currentWork.coverIsSvg"
@@ -103,7 +105,7 @@ const nextWork = computed(() => {
             <div
                 v-for="(image, index) in workImages"
                 :key="image.name"
-                class="w-full overflow-hidden bg-neutral-100"
+                class="w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800"
             >
               <!-- 同名 svg + png: png 作底圖，svg 疊加保留可點擊區域 -->
               <div v-if="image.kind === 'interactive'" class="relative">
@@ -145,7 +147,7 @@ const nextWork = computed(() => {
       </section>
 
       <!-- Work Navigation -->
-      <section class="py-16 border-t border-neutral-200">
+      <section class="py-16 border-t border-neutral-200 dark:border-neutral-800">
         <div class="content-container">
           <div class="flex items-center justify-between">
             <!-- Previous Work -->
@@ -196,7 +198,7 @@ const nextWork = computed(() => {
       </section>
 
       <!-- More Works Section -->
-      <section v-if="otherWorks.length > 0" class="py-24 bg-neutral-50">
+      <section v-if="otherWorks.length > 0" class="py-24 bg-neutral-50 dark:bg-neutral-950">
         <div class="content-container">
           <h2 class="text-xs tracking-[0.3em] uppercase text-secondary mb-16">
             More Works
@@ -209,7 +211,7 @@ const nextWork = computed(() => {
                 :to="`/work/${work.slug}`"
                 class="work-card group block"
             >
-              <div class="relative aspect-[4/3] bg-neutral-100 overflow-hidden mb-5">
+              <div class="relative aspect-[4/3] bg-neutral-100 dark:bg-neutral-800 overflow-hidden mb-5">
                 <img
                     :src="work.coverBg ? work.coverBg : work.cover"
                     :alt="work.name"

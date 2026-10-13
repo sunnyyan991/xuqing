@@ -4,7 +4,7 @@ const email = 'yanxuqing341@gmail.com'
 </script>
 
 <template>
-  <footer class="bg-black text-white py-16 mt-auto">
+  <footer class="bg-black text-white dark:bg-neutral-950 border-t border-transparent dark:border-neutral-800 py-16 mt-auto">
     <div class="content-container">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <!-- Left: Name (as shown in wireframe) -->
@@ -20,7 +20,7 @@ const email = 'yanxuqing341@gmail.com'
           >
             {{ email }}
           </a>
-          <span class="text-xs text-neutral-600">
+          <span class="text-xs text-neutral-500 dark:text-neutral-400">
             © {{ currentYear }}
           </span>
         </div>
