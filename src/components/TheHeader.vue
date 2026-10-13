@@ -58,16 +58,31 @@ watch(
         : 'bg-transparent py-8'
     ]"
   >
-    <nav class="content-container flex items-center justify-between">
-      <RouterLink
-          to="/"
-          class="text-sm tracking-[0.15em] uppercase font-medium hover:opacity-60 transition-opacity duration-300"
-          @click="closeDrawer"
-      >
-        Xuqing
-      </RouterLink>
+    <nav class="content-container flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+      <div class="flex items-center gap-3 md:gap-6">
+        <RouterLink
+            to="/"
+            class="text-sm tracking-[0.15em] uppercase font-medium hover:opacity-60 transition-opacity duration-300"
+            @click="closeDrawer"
+        >
+          Xuqing
+        </RouterLink>
 
-      <div class="flex items-center gap-4">
+        <a
+            href="https://gu0za.itch.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View my projects on itch.io (opens in a new tab)"
+            class="inline-flex items-center gap-2 whitespace-nowrap px-3 py-2 text-xs tracking-wide border border-[#FA5C5C] text-[#FA5C5C] hover:bg-[#FA5C5C] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FA5C5C] transition-colors duration-300"
+        >
+          itch.io
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M7 7h10v10"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="ml-auto flex items-center gap-2 sm:gap-4">
         <RouterLink
             to="/"
             class="nav-link"
